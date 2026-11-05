@@ -86,14 +86,21 @@
   - 后续可单独评估「平板竖屏视频全屏保持横屏（letterbox）」方案。
 - 图片请求尺寸量化会让单张图片最多多请求 256px 的档位，属于网络次数与单张体积之间的折中。
 
+## 上游同步
+
+- 同步基线：`origin/ohos` @ `a84314126`（tag `2.1.6.2-ohos-2`）。
+- 同步分支：`sync/ohos-20261106`，merge commit `a7eceeef4`。
+- 上游带来的窗口自绘标题栏、播放器 glue 重构、`file_picker` 本地包等改动均已保留；本文列出的自定义功能通过 merge 冲突解决后继续生效。
+- 当前 Flutter 3.44.9 的 SDK 约束会把 `intl`、`matcher`、`test_api`、`vector_math` 回落到可解析版本，并更新 `safe_local_storage`；这是本机构建可用的锁文件版本。
+
 ## 构建与版本
 
 本次验证构建：
 
 ```powershell
 flutter build hap --release --no-codesign --no-pub `
-  --build-name=2.1.6.2.6 `
-  --build-number=6339
+  --build-name=2.1.6.2.7 `
+  --build-number=6340
 ```
 
 产物为未签名 release HAP，安装前需使用自己的证书签名。
@@ -121,3 +128,6 @@ flutter build hap --release --no-codesign --no-pub `
 - `fix(video): 扩大分栏拖动条命中范围并保持视觉宽度`
 - `perf(image): 稳定分栏拖动时的评论图片请求尺寸`
 - `fix(video): 缩窄横屏分栏右侧空隙`
+- `Merge origin/ohos`：合入上游 `2.1.6.2-ohos-2`
+- `chore(deps): 对齐 Flutter 3.44.9 可解析的锁文件版本`
+- `docs: 更新上游同步说明`
